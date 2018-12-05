@@ -1,0 +1,13 @@
+{
+  "name": "stats-update",
+  "version": "",
+  "description": "Node.js - raspberry-pi",
+  "main": "index.js",
+  "author": "",
+  "license": "",
+  "language":"node",
+  "scripts": {
+     "start": "node index.js"
+  },
+   "dependency": null
+}
