@@ -2,9 +2,8 @@ const { promisify } = require('util');
 const { exec } = require('child_process')
 
 setInterval(async () => {
-  const {tempOut, tempError} = await promisify(exec)('vcgencmd measure_temp');
+  const tempOut = await promisify(exec)('vcgencmd measure_temp');
   console.log('tempOut', tempOut);
-  console.log('tempError', tempError);
   const temperature = parseFloat(tempOut.replace(/temp=([0-9\.]*)'C/, '$1'));
   
   const {clockOut, clockError} = await promisify(exec)('vcgencmd measure_clock arm');
