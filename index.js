@@ -12,7 +12,7 @@ setInterval(async () => {
   const volt = parseFloat(voltOut.stdout.replace(/volt=([0-9\.]*)V/, '$1'));
   
   const memOut = await promisify(exec)('free');
-  const lines = memOut.stdout.split(/\r\n|\r|\n/));
+  const lines = memOut.stdout.split(/\r\n|\r|\n/);
   console.log('lines.0', lines[0].split(/\s+/))
   console.log('lines.1', lines[1].split(/\s+/))
   console.log('lines.2', lines[2].split(/\s+/))
