@@ -13,8 +13,20 @@ setInterval(async () => {
   
   const memOut = await promisify(exec)('free');
   const lines = memOut.stdout.split(/\r\n|\r|\n/);
-  console.log('lines.0', lines[0].split(/\s+/))
-  console.log('lines.1', lines[1].split(/\s+/))
-  console.log('lines.2', lines[2].split(/\s+/))
-  console.log(`temperature: ${temperature} clock: ${clock} volt: ${volt}`)
+  let params = lines[1].split(/\s+/);
+  const memory = {
+    total: params[1],
+    used: params[2],
+    free: params[3],
+    shared: params[4],
+    cache: params[5],
+    available: params[6]
+  };
+  params = lines[2].split(/\s+/);
+  const swap = {
+    total: params[1],
+    used: params[2],
+    free: params[3]
+  }
+  console.log(`temperature: ${temperature} clock: ${clock} volt: ${volt} memory: ${memory} swap: ${swap}`);
 }, 5000);
