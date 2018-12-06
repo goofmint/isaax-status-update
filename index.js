@@ -35,8 +35,8 @@ setInterval(async () => {
   
   // ストレージ
   const storageOut = await promisify(exec)('df -h');
-  let lines = storageOut.stdout.split(/\r\n|\r|\n/);
-  let params = lines[1].split(/\s+/);
+  lines = storageOut.stdout.split(/\r\n|\r|\n/);
+  params = lines[1].split(/\s+/);
   const storage = {
     size: params[1],
     used: params[2],
