@@ -7,6 +7,7 @@ setInterval(async () => {
   const temperature = parseFloat(tempOut.stdout.replace(/temp=([0-9\.]*)'C/, '$1'));
   
   const clockOut = await promisify(exec)('vcgencmd measure_clock arm');
+  console.log('clockOut', clockOut);
   const clock = parseInt(clockOut.stdout.replace(/frequency.*=([0-9\.]*)$/, '$1'));
   
   const voltOut = await promisify(exec)('vcgencmd measure_volts');
