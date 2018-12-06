@@ -16,7 +16,7 @@ setInterval(async () => {
   
   // メモリー
   const memOut = await promisify(exec)('free');
-  const lines = memOut.stdout.split(/\r\n|\r|\n/);
+  let lines = memOut.stdout.split(/\r\n|\r|\n/);
   let params = lines[1].split(/\s+/);
   const memory = {
     total: params[1],
@@ -32,5 +32,35 @@ setInterval(async () => {
     used: params[2],
     free: params[3]
   }
-  console.log(`temperature: ${temperature} clock: ${clock} volt: ${volt} memory: ${JSON.stringify(memory)} swap: ${JSON.stringify(swap)}`);
+  
+  // ストレージ
+  const storageOut = await promisify(exec)('df -h');
+  let lines = storageOut.stdout.split(/\r\n|\r|\n/);
+  let params = lines[1].split(/\s+/);
+  const storage = {
+    size: params[1],
+    used: params[2],
+    available: params[3],
+    use: params[4]
+  }
+  
+  console.log(`
+    temperature: ${temperature} clock: ${clock} volt: ${volt}
+    memory: 
+      total: ${memory.total}
+      used: ${memory.used}
+      free: ${memory.free}
+      shared: ${memory.shared}
+      cache: ${memory.cache}
+      available: ${memory.available}
+    swap: 
+      total: ${swap.total}
+      used: ${swap.used}
+      free: ${swap.free}
+    storage:
+      size: ${storage.size}
+      used: ${storage.used}
+      available: ${storage.available}
+      use: ${storage.use}
+  `);
 }, 5000);
