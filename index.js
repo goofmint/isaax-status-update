@@ -12,6 +12,6 @@ setInterval(async () => {
   const volt = parseFloat(voltOut.stdout.replace(/volt=([0-9\.]*)V/, '$1'));
   
   const memOut = await promisify(exec)('free');
-  console.log(memOut.split(/\s/));
+  console.log(memOut.stdout.split(/\s/));
   console.log(`temperature: ${temperature} clock: ${clock} volt: ${volt}`)
 }, 5000);
